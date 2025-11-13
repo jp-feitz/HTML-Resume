@@ -1,22 +1,33 @@
-$(window).load(function(){
-  // Page Load Anim
-  $('.contOut').animate({
-    'opacity':'1'
-  },1200);
-  // Jobs Accordion
-  $('.fa-plus').closest('.job').find('p').slideUp();
-  $('.openBtn').on('click', function() {
-    if ($(this).hasClass('open')) {
-      $(this).removeClass('open').removeClass('fa-minus').addClass('fa-plus');
-      $(this).closest('.job').find('p').animate({
-        'opacity':'0'
-      },200).slideUp();
-    } else {
-      $(this).addClass('open').removeClass('fa-plus').addClass('fa-minus');
-      $(this).closest('.job').find('p').slideDown().animate({
-        'opacity':'1'
-      },400);
+// script.js - Collapse/Expand Job Sections
+document.addEventListener("DOMContentLoaded", function () {
+  const openBtns = document.querySelectorAll(".openBtn");
+
+  openBtns.forEach(btn => {
+    btn.addEventListener("click", function () {
+      const job = this.closest(".job");
+      const content = job.querySelector("p");
+      const icon = this;
+
+      // Toggle visibility
+      if (content.style.display === "none") {
+        content.style.display = "block";
+        icon.classList.remove("fa-plus");
+        icon.classList.add("fa-minus");
+      } else {
+        content.style.display = "none";
+        icon.classList.remove("fa-minus");
+        icon.classList.add("fa-plus");
+      }
+    });
+  });
+
+  // Hide all job details by default except the first one
+  document.querySelectorAll(".job p").forEach((p, index) => {
+    if (index !== 0) {
+      p.style.display = "none";
+      const icon = p.closest(".job").querySelector(".openBtn");
+      icon.classList.remove("fa-minus");
+      icon.classList.add("fa-plus");
     }
   });
-  
 });
