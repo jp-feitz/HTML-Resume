@@ -1,448 +1,408 @@
-@import compass
+/* ====== Tokens ====== */
+:root {
+  --bg: #202020;
+  --cream: #fbfae8;
+  --lav: #b6a9f9;
+  --olive: #b5a232;
+  --ink: #181818;
+  --muted: rgba(251, 250, 232, 0.66);
+  --line: rgba(251, 250, 232, 0.18);
+  --font: "Inter Tight", system-ui, -apple-system, "Segoe UI", sans-serif;
+}
 
-// clearfix
-.clearfix
-  display: inline-block
-  &:after
-    visibility: hidden
-    display: block
-    font-size: 0
-    content: " "
-    clear: both
-    height: 0
-* html .clearfix
-  height: 1%
-.clearfix
-  display: block
+/* ====== Base ====== */
+* { box-sizing: border-box; }
 
-$resumeBg: #fff
+html { scroll-behavior: smooth; scroll-padding-top: 84px; }
 
-$myBlue: #0198E1
-$myGreen: #608341
-$myOrange: #FF6103
-$myPink: #B5509C
-$myGray: #444
-$myBrown: #8B4513
+body {
+  margin: 0;
+  background: var(--bg);
+  color: var(--cream);
+  font-family: var(--font);
+  font-size: 1.05rem;
+  line-height: 1.55;
+}
 
-$gradStart: #222
-$gradEnd: #444
+h1, h2, h3, p { margin: 0; }
+a { color: inherit; }
 
-body
-  padding: 30px 20px 20px 20px
-  font-family: 'Montserrat', sans-serif
-  background-image: -webkit-gradient(linear,left top,right bottom,color-stop(0, $gradStart),color-stop(0.61, #EDEDED))
-  background-image: -o-linear-gradient(right bottom, $gradStart 0%, $gradEnd 61%)
-  background-image: -moz-linear-gradient(right bottom, $gradStart 0%, $gradEnd 61%)
-  background-image: -webkit-linear-gradient(right bottom, $gradStart 0%, $gradEnd 61%)
-  background-image: -ms-linear-gradient(right bottom, $gradStart 0%, $gradEnd 61%)
-  background-image: linear-gradient(to right bottom, $gradStart 0%, $gradEnd 61%)
-a
-  text-decoration: none
-  color: $myBlue
-.divider
-  width: 100%
-  float: left
-  &:after
-    position: absolute
-    width: 100%
-    margin-top: 0px
-    bottom: -11px
-    left: -3px
-    background: darken($resumeBg, 65%)
-    content: ""
-    display: block
-    +transform(skew(-31deg,0deg))
-    height: 11px
-.contOut
-  opacity: 0
-  width: 100%
-  max-width: 1080px
-  margin: 0 auto
-  background: $resumeBg
-  position: relative
-  overflow: visible
-  margin-bottom: 6px
-  &:before
-    position: absolute
-    width: 6px
-    margin-top: 6px
-    left: -6px
-    background: darken($resumeBg, 45%)
-    content: ""
-    display: block
-    +transform(skew(0deg,-61deg))
-    height: 100%
-  .contIn
-    width: 100%
-    float: left
-    .section
-      padding-left: 30px
-      padding-right: 30px
-      &.top
-        padding-top: 30px
-        padding-bottom: 15px
-        &:hover img
-          +filter(grayscale(0%))
-    .logoCont
-      float: left
-      width: 15%
-      .logo
-        width: 100%
-        max-width: 100px
-        min-width: 50px
-        height: auto
-        min-height: 50px
-        +filter(grayscale(100%))
-        +border-radius(2px)
-        border: solid 1px darken($resumeBg, 20%)
-    h1
-      width: 45%
-      float: left
-      display: inline-block
-      font-family: 'Playfair Display', serif
-      margin: -6px 0 0 0
-      font-size: 40px
-      line-height: 40px
-    p.tagline
-      float: left
-      width: 45%
-      font-size: 14px
-      span
-        color: darken($resumeBg, 40%)
-    .moreInfo
-      float: right
-      width: 40%
-      text-align: right
-      p
-        margin: 0
-        line-height: 20px
-        word-wrap: break-word
-.middle
-  padding-top: 20px
-  padding-bottom: 20px
-  h2
-    border-left: solid 0 $resumeBg
-    +transition(all 200ms ease-in)
-    i.fa
-      display: inline-block
-      margin-left: 10px
-      &:hover
-        cursor: pointer
-        color: darken($myBlue, 10%)
-  &:hover h2
-    border-left: solid 10px invert($resumeBg)
-    padding-left: 8px
-    +transition(all 100ms ease-in)
-  .job
-    width: 100%
-    float: left
-    h2
-      margin: 0
-      span
-        float: right
-        display: inline-block
-        font-size: 16px
-        background: invert($resumeBg)
-        color: $resumeBg
-        padding: 6px 8px
-        min-width: 120px
-        text-align: center
-    p
-      margin: 6px 0
-      .brag
-        display: inline-block
-        margin: 10px 0
-        font-style: italic
-        background: darken($resumeBg, 14%)
-        padding: 20px 20px 20px 50px
-        color: #333
-        text-align: justify
-        border-bottom: solid 1px darken($resumeBg, 25%)
-        position: relative
-        text-shadow: 0 1px 1px $resumeBg
-        max-height: 40px
-        &:before
-          position: absolute
-          left: 0
-          top: 0
-          content: ""
-          width: 0
-          height: 0
-          border-top: 40px solid transparent
-          border-bottom: 40px solid transparent
-          border-left: 40px solid $resumeBg
-.skills
-  width: 49%
-  display: block
-  float: left
-  padding-bottom: 20px
-  h3
-    margin: 20px 20px 10px 20px
-    text-transform: uppercase
-    position: relative
-    .fa
-      position: absolute
-      top: -4px
-      right: 0
-      padding: 4px
-      +border-radius(3px)
-  ul
-    font-size: 14px
-    list-style: none
-    margin: 0
-    padding: 0 20px
-    li
-      float: left // disable for list view
-      padding: 4px 6px
-      margin: 0 4px 4px 0
-      &.light
-        opacity: 0.6
-  &.odd
-    margin-right: 2%
-  &.code
-    background: $myBlue
-    .fa
-      background: lighten($myBlue, 15%)
-      +box-shadow(inset 0 1px 2px darken($myBlue, 30%))
-    li
-      background: darken($myBlue, 12%)
-      text-shadow: 0 1px 1px $myBlue
-      &:hover
-        background: darken($myBlue, 6%)
-      &.prim
-        text-shadow: none
-        background: darken($myBlue, 25%)
-        color: $resumeBg
-        clear: left
-  &.software
-    background: $myGreen
-    .fa
-      background: lighten($myGreen, 15%)
-      +box-shadow(inset 0 1px 2px darken($myGreen, 30%))
-    li
-      background: darken($myGreen, 12%)
-      text-shadow: 0 1px 1px $myGreen
-      &:hover
-        background: darken($myGreen, 6%)
-      &.prim
-        text-shadow: none
-        background: darken($myGreen, 25%)
-        color: #fff
-        clear: left
-ul.buttons
-  margin: 0
-  padding: 0
-  list-style: none
-  li
-    float: left
-    text-align: center
-    display: inline-block
-    width: 32%
-    margin-right: 1%
-    +border-radius(2px)
-    position: relative
-    margin-bottom: 8px
-    a
-      display: inline-block
-      padding: 10px 0
-      color: $resumeBg
-    &:last-child
-      margin-right: 0
-      background: $myBrown
-      border-bottom: solid 3px darken($myBrown, 20%)
-      +transition(all 100ms ease-in-out)
-      width: 33%
-      &:hover
-        background: lighten($myBrown, 10%)
-        border-bottom: solid 3px darken($myBrown, 5%)
-        +transition(all 200ms ease-in-out)
-    &:nth-child(1)
-      background: $myPink
-      border-bottom: solid 3px darken($myPink, 20%)
-      +transition(all 100ms ease-in-out)
-      &:hover
-        background: lighten($myPink, 10%)
-        border-bottom: solid 3px darken($myPink, 5%)
-        +transition(all 200ms ease-in-out)
-    &:nth-child(2)
-      background: $myGreen
-      border-bottom: solid 3px darken($myGreen, 20%)
-      +transition(all 100ms ease-in-out)
-      &:hover
-        background: lighten($myGreen, 10%)
-        border-bottom: solid 3px darken($myGreen, 5%)
-        +transition(all 200ms ease-in-out)
-    &:nth-child(3)
-      background: $myBlue
-      border-bottom: solid 3px darken($myBlue, 20%)
-      +transition(all 100ms ease-in-out)
-      margin-right: 0
-      width: 33%
-      &:hover
-        background: lighten($myBlue, 10%)
-        border-bottom: solid 3px darken($myBlue, 5%)
-        +transition(all 200ms ease-in-out)
-    &:nth-child(4)
-      background: $myOrange
-      border-bottom: solid 3px darken($myOrange, 20%)
-      +transition(all 100ms ease-in-out)
-      &:hover
-        background: lighten($myOrange, 10%)
-        border-bottom: solid 3px darken($myOrange, 5%)
-        +transition(all 200ms ease-in-out)
-    &:nth-child(5)
-      background: $myGray
-      border-bottom: solid 3px darken($myGray, 20%)
-      +transition(all 100ms ease-in-out)
-      &:hover
-        background: lighten($myGray, 10%)
-        border-bottom: solid 3px darken($myGray, 5%)
-        +transition(all 200ms ease-in-out)
-          
-@media(max-width: 1010px)
-  .contOut .contIn h1, .contOut .contIn p.tagline
-    width: 42%
-    margin-left: 3%
-  .skills.code, .skills.software
-    width: 100%
-  .skills.code
-    margin-bottom: 10px
-  ul.buttons li
-    width: 48%
-    margin-bottom: 10px
-    &:nth-child(3), &:last-child
-      width: 48%
-  ul.buttons li:nth-child(even)
-    float: right
-    margin-right: 0
+.wrap { max-width: 1180px; margin: 0 auto; padding-left: 28px; padding-right: 28px; }
 
-@media(max-width: 850px)
-  .middle .job p .brag
-    padding-left: 70px
-    max-height: 60px
-    &:before
-      border-top: 50px solid transparent
-      border-bottom: 50px solid transparent
-      border-left: 50px solid $resumeBg
-  .contOut .contIn
-    .logoCont
-      width: 35%
-      .logo
-        max-width: 200px
-    h1
-      width: 62%
-      float: right
-      text-align: right
-      margin-bottom: 10px
-    .moreInfo
-      width: 60%
-    p.tagline
-      clear: left
-      width: 30%
-      margin: 0
-.contracts
-  width: 100%
-  +box-sizing(border-box)
-  padding: 20px 30px
-  h3
-    margin: 0 0 20px 0
-  .contract
-    +box-sizing(border-box)
-    padding: 10px
-    width: 24%
-    min-height: 160px
-    background: #ffc
-    border: solid 1px darken(#ffc, 10%)
-    +box-shadow(0 1px 2px #999)
-    color: darken(#ffc, 80%)
-    float: left
-    margin-right: 1%
-    margin-bottom: 10px
-    position: relative
-    padding-bottom: 15px
-    h4
-      margin: 0
-    p.desc
-      font-size: 14px
-      color: darken(#ffc, 75%)
-      word-wrap: break-word
-      a:hover
-        text-decoration: underline
-    span.date
-      position: absolute
-      bottom: 5px
-      right: 5px
-      font-size: 12px
-      color: darken(#ffc, 60%)
+:focus-visible { outline: 2px solid var(--lav); outline-offset: 3px; }
 
-@media(max-width: 800px)
-  .contracts .contract
-    width: 49%
-@media(max-width: 620px)
-  .middle .job p .brag
-    padding-left: 80px
-    max-height: 80px
-    &:before
-      border-top: 60px solid transparent
-      border-bottom: 60px solid transparent
-      border-left: 60px solid $resumeBg
-    
-@media(max-width: 570px)
-  .middle .job p .brag
-    padding-left: 90px
-    max-height: 100px
-    &:before
-      border-top: 70px solid transparent
-      border-bottom: 70px solid transparent
-      border-left: 70px solid $resumeBg
-  ul.buttons li
-    width: 100%
-    margin-right: 0
-    &:nth-child(3), &:last-child
-      width: 100%
-  .skills ul li
-    float: none
-  .contOut .contIn
-    h1
-      font-size: 34px
-  .contracts .contract
-    width: 100%
-    margin-right: 0
-      
-@media(max-width: 500px)
-  .middle .job p .brag
-    padding-left: 20px
-    max-height: none
-    &:before
-      border-top: none
-      border-bottom: none
-      border-left: none
-  .middle .job h2 span
-    margin-top: 10px
-  .contOut .contIn
-    h1
-      font-size: 28px
-    .moreInfo
-      font-size: 14px
-      
-@media(max-width: 450px)
-  .contOut .contIn
-    .moreInfo, p.tagline
-      font-size: 12px
+/* ====== Header ====== */
+.site-header {
+  position: sticky;
+  top: 0;
+  z-index: 10;
+  background: rgba(32, 32, 32, 0.88);
+  backdrop-filter: blur(10px);
+  -webkit-backdrop-filter: blur(10px);
+}
+.header__inner {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 24px;
+  padding-top: 20px;
+  padding-bottom: 20px;
+}
+.brand { display: flex; align-items: baseline; gap: 14px; text-decoration: none; }
+.brand__name { font-size: 1.6rem; font-weight: 300; letter-spacing: -0.02em; }
+.brand__role { font-size: 0.95rem; font-weight: 500; }
 
-.sm
-  list-style: none
-  position: absolute
-  top: 10px
-  right: 30px
-  margin: 0
-  li
-    display: inline-block
-    float: left
-    margin-left: 6px
-    a
-      //text-shadow: 0 1px 1px #fff
-      color: #ccc
-      &:hover
-        color: #fff
-    
+.nav { display: flex; gap: 36px; }
+.nav a {
+  text-decoration: none;
+  font-weight: 500;
+  padding-bottom: 3px;
+  border-bottom: 1.5px solid transparent;
+  transition: border-color 0.2s;
+}
+.nav a:hover,
+.nav a.is-current { border-bottom-color: var(--cream); }
+
+/* ====== Buttons ====== */
+.btn {
+  display: inline-block;
+  padding: 15px 30px;
+  border-radius: 999px;
+  border: 0;
+  font: inherit;
+  font-weight: 500;
+  text-decoration: none;
+  cursor: pointer;
+  transition: transform 0.18s, filter 0.18s;
+}
+.btn:hover { transform: translateY(-2px); filter: brightness(1.08); }
+.btn--olive { background: var(--olive); color: var(--ink); }
+.btn--cream { background: var(--cream); color: var(--ink); }
+.btn--ink { background: var(--ink); color: var(--cream); }
+
+/* ====== Reveal on scroll ====== */
+.js .reveal {
+  opacity: 0;
+  transform: translateY(32px);
+  transition: opacity 0.8s ease, transform 0.8s cubic-bezier(0.2, 0.7, 0.2, 1);
+  transition-delay: var(--d, 0ms);
+}
+.js .reveal.is-in { opacity: 1; transform: none; }
+
+/* ====== Hero ====== */
+.hero {
+  display: grid;
+  grid-template-columns: minmax(0, 1.05fr) minmax(0, 1fr);
+  gap: 64px;
+  align-items: start;
+  padding-top: 20px;
+}
+
+.hero-card {
+  position: relative;
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  grid-template-rows: auto 1fr;
+  min-height: 600px;
+  background: var(--lav);
+  color: var(--ink);
+  border-radius: 28px;
+  overflow: hidden;
+}
+
+.hero-card__hello {
+  grid-column: 1 / -1;
+  padding: 10px 30px 0;
+  font-size: clamp(4.5rem, 12vw, 9rem);
+  font-weight: 300;
+  line-height: 1;
+  letter-spacing: -0.05em;
+}
+
+.hero-card__photo {
+  position: relative;
+  align-self: end;
+  aspect-ratio: 4 / 5;
+  background: rgba(24, 24, 24, 0.1);
+  border-top-right-radius: 28px;
+  overflow: hidden;
+}
+.hero-card__photo span {
+  position: absolute;
+  inset: 0;
+  display: grid;
+  place-items: center;
+  font-size: 3rem;
+  font-weight: 300;
+  opacity: 0.35;
+}
+.hero-card__photo img {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+.hero-card__meta {
+  align-self: end;
+  padding: 0 28px 28px;
+  display: flex;
+  flex-direction: column;
+}
+.hero-card__meta strong { font-size: 1.6rem; font-weight: 400; letter-spacing: -0.02em; line-height: 1.2; }
+
+/* Olive social tile */
+.social {
+  position: absolute;
+  left: 0;
+  bottom: 0;
+  display: grid;
+  grid-template-columns: repeat(2, 58px);
+  grid-auto-rows: 58px;
+  background: var(--olive);
+  border-top-right-radius: 14px;
+}
+.social a {
+  display: grid;
+  place-items: center;
+  color: var(--ink);
+  font-size: 1.2rem;
+  font-weight: 700;
+  text-decoration: none;
+  border-right: 1px dashed rgba(24, 24, 24, 0.5);
+  border-bottom: 1px dashed rgba(24, 24, 24, 0.5);
+  transition: background 0.15s;
+}
+.social a:nth-child(2n) { border-right: 0; }
+.social a:nth-child(n + 3) { border-bottom: 0; }
+.social a:hover { background: rgba(255, 255, 255, 0.25); }
+
+.hero__text { padding-top: 12px; }
+.big {
+  font-size: clamp(1.35rem, 2.3vw, 1.95rem);
+  font-weight: 400;
+  line-height: 1.3;
+  letter-spacing: -0.015em;
+  max-width: 28em;
+  margin-bottom: 28px;
+}
+.hero__actions { display: flex; gap: 12px; flex-wrap: wrap; }
+
+/* ====== Sections & headlines ====== */
+.section { padding-top: 120px; }
+
+.mega {
+  font-size: clamp(4rem, 13vw, 10rem);
+  font-weight: 300;
+  line-height: 0.95;
+  letter-spacing: -0.05em;
+  color: var(--cream);
+}
+
+.resume__top {
+  display: flex;
+  align-items: flex-end;
+  justify-content: space-between;
+  gap: 24px;
+  flex-wrap: wrap;
+  margin-bottom: 64px;
+}
+
+/* ====== Resume columns ====== */
+.cols { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 64px; }
+
+.col__title {
+  display: flex;
+  align-items: center;
+  gap: 14px;
+  font-size: 1.9rem;
+  font-weight: 600;
+  letter-spacing: -0.02em;
+  margin-bottom: 8px;
+}
+.col__title::before {
+  content: "";
+  width: 22px;
+  height: 22px;
+  border-radius: 50%;
+  background: var(--olive);
+}
+.col__title--second { margin-top: 56px; margin-bottom: 20px; }
+
+.entry { margin-bottom: 36px; }
+.entry__date { font-weight: 700; margin: 26px 0 12px; }
+
+.block {
+  display: block;
+  width: 100%;
+  background: var(--lav);
+  color: var(--ink);
+  border-radius: 6px;
+  overflow: hidden;
+}
+.block__row {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 16px;
+  padding: 14px 18px;
+  border-top: 1px dashed rgba(24, 24, 24, 0.5);
+}
+.block__row:first-child { border-top: 0; }
+
+button.block {
+  border: 0;
+  padding: 0;
+  font: inherit;
+  text-align: left;
+  cursor: pointer;
+  transition: filter 0.15s;
+}
+button.block:hover { filter: brightness(1.06); }
+
+.plus {
+  flex: none;
+  display: grid;
+  place-items: center;
+  width: 24px;
+  height: 24px;
+  border-radius: 50%;
+  border: 1.5px solid var(--ink);
+  font-size: 1.1rem;
+  line-height: 1;
+}
+.plus::before { content: "+"; }
+[aria-expanded="true"] .plus::before { content: "\2212"; }
+
+.entry__desc { display: grid; grid-template-rows: 0fr; transition: grid-template-rows 0.35s ease; }
+.entry__desc.is-open { grid-template-rows: 1fr; }
+.entry__desc > div { overflow: hidden; min-height: 0; }
+.entry__desc ul { margin: 0; padding: 20px 0 0 20px; color: var(--muted); }
+.entry__desc li { margin-bottom: 10px; padding-left: 4px; }
+.entry__desc li::marker { color: var(--olive); }
+
+.block--certs .block__row span:last-child { font-weight: 400; opacity: 0.75; }
+
+/* ====== Skills list ====== */
+.rows { list-style: none; margin: 56px 0 0; padding: 0; border-bottom: 1px solid var(--line); }
+
+.row {
+  display: grid;
+  grid-template-columns: auto minmax(0, 1fr) auto;
+  align-items: center;
+  gap: 8px 20px;
+  padding: 36px 0;
+  border-top: 1px solid var(--line);
+}
+
+.row__n { align-self: start; margin-top: 10px; color: var(--olive); font-size: 0.95rem; font-weight: 600; }
+.row__name {
+  font-size: clamp(1.9rem, 4.4vw, 3.5rem);
+  font-weight: 300;
+  letter-spacing: -0.03em;
+  line-height: 1.1;
+  transition: transform 0.3s cubic-bezier(0.2, 0.7, 0.2, 1), color 0.2s;
+}
+.row:hover .row__name { transform: translateX(14px); color: var(--lav); }
+
+.tags { list-style: none; margin: 0; padding: 0; display: flex; flex-wrap: wrap; justify-content: flex-end; gap: 8px; max-width: 420px; }
+.tags li {
+  padding: 6px 14px;
+  border: 1px solid var(--lav);
+  border-radius: 999px;
+  color: var(--lav);
+  font-size: 0.92rem;
+  font-weight: 500;
+  transition: background 0.2s, color 0.2s;
+}
+.row:hover .tags li { background: var(--lav); color: var(--ink); }
+
+/* ====== Contact ====== */
+.contact { display: grid; grid-template-columns: minmax(0, 1.1fr) minmax(0, 1fr); gap: 64px; align-items: start; }
+.contact .big { margin: 32px 0 12px; }
+.contact__email {
+  display: inline-block;
+  font-size: clamp(1.3rem, 3vw, 2rem);
+  font-weight: 500;
+  letter-spacing: -0.02em;
+  text-decoration-color: var(--olive);
+  text-decoration-thickness: 2px;
+  text-underline-offset: 6px;
+  overflow-wrap: anywhere;
+}
+
+.form {
+  background: var(--lav);
+  color: var(--ink);
+  border-radius: 6px;
+  padding: 28px;
+  display: grid;
+  gap: 18px;
+}
+.form__pair { display: grid; grid-template-columns: 1fr 1fr; gap: 18px; }
+.form label { display: grid; gap: 4px; min-width: 0; font-size: 0.85rem; font-weight: 500; }
+.form input,
+.form textarea {
+  width: 100%;
+  min-width: 0;
+  font: inherit;
+  font-size: 1rem;
+  color: var(--ink);
+  background: transparent;
+  border: 0;
+  border-bottom: 1px solid var(--ink);
+  border-radius: 0;
+  padding: 8px 0;
+  resize: vertical;
+}
+.form input:focus-visible,
+.form textarea:focus-visible { outline: 2px solid var(--ink); outline-offset: 4px; }
+.form__foot { display: flex; align-items: center; gap: 16px; flex-wrap: wrap; }
+.form__foot p { font-size: 0.85rem; opacity: 0.75; }
+
+/* ====== Footer ====== */
+.footer {
+  display: flex;
+  justify-content: space-between;
+  gap: 16px 32px;
+  flex-wrap: wrap;
+  margin-top: 120px;
+  padding-top: 28px;
+  padding-bottom: 48px;
+  border-top: 1px solid var(--line);
+  font-size: 0.95rem;
+}
+.footer__links { display: flex; gap: 20px; }
+
+/* ====== Small screens & motion ====== */
+@media (max-width: 900px) {
+  .hero, .cols, .contact { grid-template-columns: 1fr; gap: 48px; }
+  .section { padding-top: 88px; }
+  .hero-card { min-height: 540px; }
+}
+
+@media (max-width: 640px) {
+  .wrap { padding-left: 20px; padding-right: 20px; }
+  .brand__role { display: none; }
+  .brand__name { font-size: 1.3rem; }
+  .nav { gap: 18px; font-size: 0.95rem; }
+  .row { grid-template-columns: auto minmax(0, 1fr); }
+  .tags { grid-column: 2; justify-content: flex-start; max-width: none; }
+  .form__pair { grid-template-columns: 1fr; }
+  .hero-card__hello { padding-left: 22px; }
+  .hero-card__meta { padding: 0 18px 22px 12px; }
+  .hero-card__meta strong { font-size: 1.25rem; }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  * { transition: none !important; animation: none !important; scroll-behavior: auto !important; }
+  .js .reveal { opacity: 1; transform: none; }
+}
+
+@media print {
+  .site-header, .hero__actions, .form { display: none; }
+  body { background: #fff; color: #000; }
+  .js .reveal { opacity: 1; transform: none; }
+  .entry__desc { grid-template-rows: 1fr; }
+}
