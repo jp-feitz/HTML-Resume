@@ -2,124 +2,706 @@
 <html lang="en">
 <head>
   <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-  <title>Jarod Feitshans - Resume</title>
-  <link rel="stylesheet" href="Resume.css" />
-  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Jarod Feitshans | Resume</title>
+  <meta name="description" content="Interactive resume of Jarod Feitshans, System/Software Engineer" />
+  <script>document.documentElement.classList.add("js");</script>
+
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Inter+Tight:wght@300;400;500;600;700&display=swap" rel="stylesheet" />
   <style>
-    /* Inline fallback in case style.css fails */
-    body { font-family: 'Segoe UI', sans-serif; background: #f9f9f9; color: #333; margin: 0; padding: 20px; }
-    .contOut { width: 100%; max-width: 900px; margin: 0 auto; background: white; padding: 20px; border-radius: 10px; box-shadow: 0 0 20px rgba(0,0,0,0.1); }
-    .clearfix::after { content: ""; display: table; clear: both; }
-    h1 { font-size: 2.5em; margin: 0; color: #2c3e50; }
-    .tagline { font-style: italic; color: #3498db; }
-    .job h2 { cursor: pointer; }
-    .fa { margin-left: 10px; }
-    ul { padding-left: 20px; }
-    .skills ul { columns: 2; list-style: none; padding: 0; }
-    .skills li.prim { font-weight: bold; color: #2c3e50; }
-    .skills li.light { color: #777; }
-    .buttons a { display: inline-block; margin: 5px; padding: 10px 15px; background: #3498db; color: white; text-decoration: none; border-radius: 5px; }
-    .sm a { color: #3498db; margin: 0 10px; font-size: 1.5em; }
-  </style>
+html { background: #202020; }
+/* ====== Tokens ====== */
+:root {
+  --bg: #202020;
+  --cream: #fbfae8;
+  --lav: #b6a9f9;
+  --olive: #b5a232;
+  --ink: #181818;
+  --muted: rgba(251, 250, 232, 0.66);
+  --line: rgba(251, 250, 232, 0.18);
+  --font: "Inter Tight", system-ui, -apple-system, "Segoe UI", sans-serif;
+}
+
+/* ====== Base ====== */
+* { box-sizing: border-box; }
+
+html { scroll-behavior: smooth; scroll-padding-top: 84px; }
+
+body {
+  margin: 0;
+  background: var(--bg);
+  color: var(--cream);
+  font-family: var(--font);
+  font-size: 1.05rem;
+  line-height: 1.55;
+}
+
+h1, h2, h3, p { margin: 0; }
+a { color: inherit; }
+
+.wrap { max-width: 1180px; margin: 0 auto; padding-left: 28px; padding-right: 28px; }
+
+:focus-visible { outline: 2px solid var(--lav); outline-offset: 3px; }
+
+/* ====== Header ====== */
+.site-header {
+  position: sticky;
+  top: 0;
+  z-index: 10;
+  background: rgba(32, 32, 32, 0.88);
+  backdrop-filter: blur(10px);
+  -webkit-backdrop-filter: blur(10px);
+}
+.header__inner {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 24px;
+  padding-top: 20px;
+  padding-bottom: 20px;
+}
+.brand { display: flex; align-items: baseline; gap: 14px; text-decoration: none; }
+.brand__name { font-size: 1.6rem; font-weight: 300; letter-spacing: -0.02em; }
+.brand__role { font-size: 0.95rem; font-weight: 500; }
+
+.nav { display: flex; gap: 36px; }
+.nav a {
+  text-decoration: none;
+  font-weight: 500;
+  padding-bottom: 3px;
+  border-bottom: 1.5px solid transparent;
+  transition: border-color 0.2s;
+}
+.nav a:hover,
+.nav a.is-current { border-bottom-color: var(--cream); }
+
+/* ====== Buttons ====== */
+.btn {
+  display: inline-block;
+  padding: 15px 30px;
+  border-radius: 999px;
+  border: 0;
+  font: inherit;
+  font-weight: 500;
+  text-decoration: none;
+  cursor: pointer;
+  transition: transform 0.18s, filter 0.18s;
+}
+.btn:hover { transform: translateY(-2px); filter: brightness(1.08); }
+.btn--olive { background: var(--olive); color: var(--ink); }
+.btn--cream { background: var(--cream); color: var(--ink); }
+.btn--ink { background: var(--ink); color: var(--cream); }
+
+/* ====== Reveal on scroll ====== */
+.js .reveal {
+  opacity: 0;
+  transform: translateY(32px);
+  transition: opacity 0.8s ease, transform 0.8s cubic-bezier(0.2, 0.7, 0.2, 1);
+  transition-delay: var(--d, 0ms);
+}
+.js .reveal.is-in { opacity: 1; transform: none; }
+
+/* ====== Hero ====== */
+.hero {
+  display: grid;
+  grid-template-columns: minmax(0, 1.05fr) minmax(0, 1fr);
+  gap: 64px;
+  align-items: start;
+  padding-top: 20px;
+}
+
+.hero-card {
+  position: relative;
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  grid-template-rows: auto 1fr;
+  min-height: 600px;
+  background: var(--lav);
+  color: var(--ink);
+  border-radius: 28px;
+  overflow: hidden;
+}
+
+.hero-card__hello {
+  grid-column: 1 / -1;
+  padding: 10px 30px 0;
+  font-size: clamp(4.5rem, 12vw, 9rem);
+  font-weight: 300;
+  line-height: 1;
+  letter-spacing: -0.05em;
+}
+
+.hero-card__photo {
+  position: relative;
+  align-self: end;
+  aspect-ratio: 4 / 5;
+  background: rgba(24, 24, 24, 0.1);
+  border-top-right-radius: 28px;
+  overflow: hidden;
+}
+.hero-card__photo span {
+  position: absolute;
+  inset: 0;
+  display: grid;
+  place-items: center;
+  font-size: 3rem;
+  font-weight: 300;
+  opacity: 0.35;
+}
+.hero-card__photo img {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+.hero-card__meta {
+  align-self: end;
+  padding: 0 28px 28px;
+  display: flex;
+  flex-direction: column;
+}
+.hero-card__meta strong { font-size: 1.6rem; font-weight: 400; letter-spacing: -0.02em; line-height: 1.2; }
+
+/* Olive social tile */
+.social {
+  position: absolute;
+  left: 0;
+  bottom: 0;
+  display: grid;
+  grid-template-columns: repeat(2, 58px);
+  grid-auto-rows: 58px;
+  background: var(--olive);
+  border-top-right-radius: 14px;
+}
+.social a {
+  display: grid;
+  place-items: center;
+  color: var(--ink);
+  font-size: 1.2rem;
+  font-weight: 700;
+  text-decoration: none;
+  border-right: 1px dashed rgba(24, 24, 24, 0.5);
+  border-bottom: 1px dashed rgba(24, 24, 24, 0.5);
+  transition: background 0.15s;
+}
+.social a:nth-child(2n) { border-right: 0; }
+.social a:nth-child(n + 3) { border-bottom: 0; }
+.social a:hover { background: rgba(255, 255, 255, 0.25); }
+
+.hero__text { padding-top: 12px; }
+.big {
+  font-size: clamp(1.35rem, 2.3vw, 1.95rem);
+  font-weight: 400;
+  line-height: 1.3;
+  letter-spacing: -0.015em;
+  max-width: 28em;
+  margin-bottom: 28px;
+}
+.hero__actions { display: flex; gap: 12px; flex-wrap: wrap; }
+
+/* ====== Sections & headlines ====== */
+.section { padding-top: 120px; }
+
+.mega {
+  font-size: clamp(4rem, 13vw, 10rem);
+  font-weight: 300;
+  line-height: 0.95;
+  letter-spacing: -0.05em;
+  color: var(--cream);
+}
+
+.resume__top {
+  display: flex;
+  align-items: flex-end;
+  justify-content: space-between;
+  gap: 24px;
+  flex-wrap: wrap;
+  margin-bottom: 64px;
+}
+
+/* ====== Resume columns ====== */
+.cols { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 64px; }
+
+.col__title {
+  display: flex;
+  align-items: center;
+  gap: 14px;
+  font-size: 1.9rem;
+  font-weight: 600;
+  letter-spacing: -0.02em;
+  margin-bottom: 8px;
+}
+.col__title::before {
+  content: "";
+  width: 22px;
+  height: 22px;
+  border-radius: 50%;
+  background: var(--olive);
+}
+.col__title--second { margin-top: 56px; margin-bottom: 20px; }
+
+.entry { margin-bottom: 36px; }
+.entry__date { font-weight: 700; margin: 26px 0 12px; }
+
+.block {
+  display: block;
+  width: 100%;
+  background: var(--lav);
+  color: var(--ink);
+  border-radius: 6px;
+  overflow: hidden;
+}
+.block__row {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 16px;
+  padding: 14px 18px;
+  border-top: 1px dashed rgba(24, 24, 24, 0.5);
+}
+.block__row:first-child { border-top: 0; }
+
+button.block {
+  border: 0;
+  padding: 0;
+  font: inherit;
+  text-align: left;
+  cursor: pointer;
+  transition: filter 0.15s;
+}
+button.block:hover { filter: brightness(1.06); }
+
+.plus {
+  flex: none;
+  display: grid;
+  place-items: center;
+  width: 24px;
+  height: 24px;
+  border-radius: 50%;
+  border: 1.5px solid var(--ink);
+  font-size: 1.1rem;
+  line-height: 1;
+}
+.plus::before { content: "+"; }
+[aria-expanded="true"] .plus::before { content: "\2212"; }
+
+.entry__desc { display: grid; grid-template-rows: 0fr; transition: grid-template-rows 0.35s ease; }
+.entry__desc.is-open { grid-template-rows: 1fr; }
+.entry__desc > div { overflow: hidden; min-height: 0; }
+.entry__desc ul { margin: 0; padding: 20px 0 0 20px; color: var(--muted); }
+.entry__desc li { margin-bottom: 10px; padding-left: 4px; }
+.entry__desc li::marker { color: var(--olive); }
+
+.block--certs .block__row span:last-child { font-weight: 400; opacity: 0.75; }
+
+/* ====== Skills list ====== */
+.rows { list-style: none; margin: 56px 0 0; padding: 0; border-bottom: 1px solid var(--line); }
+
+.row {
+  display: grid;
+  grid-template-columns: auto minmax(0, 1fr) auto;
+  align-items: center;
+  gap: 8px 20px;
+  padding: 36px 0;
+  border-top: 1px solid var(--line);
+}
+
+.row__n { align-self: start; margin-top: 10px; color: var(--olive); font-size: 0.95rem; font-weight: 600; }
+.row__name {
+  font-size: clamp(1.9rem, 4.4vw, 3.5rem);
+  font-weight: 300;
+  letter-spacing: -0.03em;
+  line-height: 1.1;
+  transition: transform 0.3s cubic-bezier(0.2, 0.7, 0.2, 1), color 0.2s;
+}
+.row:hover .row__name { transform: translateX(14px); color: var(--lav); }
+
+.tags { list-style: none; margin: 0; padding: 0; display: flex; flex-wrap: wrap; justify-content: flex-end; gap: 8px; max-width: 420px; }
+.tags li {
+  padding: 6px 14px;
+  border: 1px solid var(--lav);
+  border-radius: 999px;
+  color: var(--lav);
+  font-size: 0.92rem;
+  font-weight: 500;
+  transition: background 0.2s, color 0.2s;
+}
+.row:hover .tags li { background: var(--lav); color: var(--ink); }
+
+/* ====== Contact ====== */
+.contact { display: grid; grid-template-columns: minmax(0, 1.1fr) minmax(0, 1fr); gap: 64px; align-items: start; }
+.contact .big { margin: 32px 0 12px; }
+.contact__email {
+  display: inline-block;
+  font-size: clamp(1.3rem, 3vw, 2rem);
+  font-weight: 500;
+  letter-spacing: -0.02em;
+  text-decoration-color: var(--olive);
+  text-decoration-thickness: 2px;
+  text-underline-offset: 6px;
+  overflow-wrap: anywhere;
+}
+
+.form {
+  background: var(--lav);
+  color: var(--ink);
+  border-radius: 6px;
+  padding: 28px;
+  display: grid;
+  gap: 18px;
+}
+.form__pair { display: grid; grid-template-columns: 1fr 1fr; gap: 18px; }
+.form label { display: grid; gap: 4px; min-width: 0; font-size: 0.85rem; font-weight: 500; }
+.form input,
+.form textarea {
+  width: 100%;
+  min-width: 0;
+  font: inherit;
+  font-size: 1rem;
+  color: var(--ink);
+  background: transparent;
+  border: 0;
+  border-bottom: 1px solid var(--ink);
+  border-radius: 0;
+  padding: 8px 0;
+  resize: vertical;
+}
+.form input:focus-visible,
+.form textarea:focus-visible { outline: 2px solid var(--ink); outline-offset: 4px; }
+.form__foot { display: flex; align-items: center; gap: 16px; flex-wrap: wrap; }
+.form__foot p { font-size: 0.85rem; opacity: 0.75; }
+
+/* ====== Footer ====== */
+.footer {
+  display: flex;
+  justify-content: space-between;
+  gap: 16px 32px;
+  flex-wrap: wrap;
+  margin-top: 120px;
+  padding-top: 28px;
+  padding-bottom: 48px;
+  border-top: 1px solid var(--line);
+  font-size: 0.95rem;
+}
+.footer__links { display: flex; gap: 20px; }
+
+/* ====== Small screens & motion ====== */
+@media (max-width: 900px) {
+  .hero, .cols, .contact { grid-template-columns: 1fr; gap: 48px; }
+  .section { padding-top: 88px; }
+  .hero-card { min-height: 540px; }
+}
+
+@media (max-width: 640px) {
+  .wrap { padding-left: 20px; padding-right: 20px; }
+  .brand__role { display: none; }
+  .brand__name { font-size: 1.3rem; }
+  .nav { gap: 18px; font-size: 0.95rem; }
+  .row { grid-template-columns: auto minmax(0, 1fr); }
+  .tags { grid-column: 2; justify-content: flex-start; max-width: none; }
+  .form__pair { grid-template-columns: 1fr; }
+  .hero-card__hello { padding-left: 22px; }
+  .hero-card__meta { padding: 0 18px 22px 12px; }
+  .hero-card__meta strong { font-size: 1.25rem; }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  * { transition: none !important; animation: none !important; scroll-behavior: auto !important; }
+  .js .reveal { opacity: 1; transform: none; }
+}
+
+@media print {
+  .site-header, .hero__actions, .form { display: none; }
+  body { background: #fff; color: #000; }
+  .js .reveal { opacity: 1; transform: none; }
+  .entry__desc { grid-template-rows: 1fr; }
+}
+
+</style>
 </head>
-<body>
+<body id="top">
 
-<div class="contOut clearfix">
-  <div class="contIn">
-    <div class="section top clearfix">
-      <div class="logoCont" style="float:left; margin-right:20px;">
-        <img class="logo" src="https://github.com/jp-feitz/HTML-Resume/blob/main/resumepic.jpg?raw=true" alt="Jarod Feitshans" style="width:100px; border-radius:50%;">
+  <!-- ====== HEADER ====== -->
+  <header class="site-header">
+    <div class="wrap header__inner">
+      <a class="brand" href="#top">
+        <span class="brand__name">Jarod Feitshans</span>
+        <span class="brand__role">[ System/Software Engineer ]</span>
+      </a>
+      <nav class="nav" aria-label="Main">
+        <a href="#about">About</a>
+        <a href="#resume">Resume</a>
+        <a href="#skills">Skills</a>
+        <a href="#contact">Contact</a>
+      </nav>
+    </div>
+  </header>
+
+  <main>
+
+    <!-- ====== ABOUT / HERO ====== -->
+    <section id="about" class="wrap hero">
+      <div class="hero-card reveal">
+        <h1 class="hero-card__hello">Hello</h1>
+
+        <div class="hero-card__photo">
+          <span aria-hidden="true">JF</span>
+          <img src="https://github.com/jp-feitz/HTML-Resume/blob/main/resumepic.jpg?raw=true"
+               alt="Jarod Feitshans" onerror="this.style.display='none'" />
+        </div>
+
+        <div class="hero-card__meta">
+          <strong>Jarod Feitshans</strong>
+          <span>System/Software Engineer</span>
+        </div>
+
+        <div class="social" aria-label="Links">
+          <a href="https://www.linkedin.com/in/jarod-feitshans-126265223" target="_blank" rel="noopener" aria-label="LinkedIn">in</a>
+          <a href="https://github.com/jp-feitz" target="_blank" rel="noopener" aria-label="GitHub">gh</a>
+          <a href="mailto:jpfeitshans@comcast.net" aria-label="Email">@</a>
+          <a href="resume.pdf" download aria-label="Download resume as PDF">cv</a>
+        </div>
       </div>
-      <h1>Jarod Feitshans</h1>
-      <div class="moreInfo" style="float:right; text-align:right; font-size:0.9em;">
-        <p>
-          288 Elegant Drive<br>
-          Martinsburg, WV<br>
-          jpfeitshans@comcast.net<br>
-          703-855-2675<br>
-          <a href="https://www.linkedin.com/in/jarod-feitshans-126265223" target="_blank"> <a Linkedin/a>
+
+      <div class="hero__text">
+        <p class="big reveal">
+          I'm a System Software Engineer at CACI, working across Active Directory,
+          Entra ID, Microsoft Defender, Intune, and containerized lab infrastructure.
         </p>
-      </div>
-      <p class="tagline">System/Software Engineer<br><br><span>Azure Static Web App</span></p>
-    </div>
-    <hr class="divider">
-
-    <div class="section middle clearfix">
-      <div class="job">
-        <h2>CACI  <i class="fa fa-minus openBtn"></i> <span style="float:right; font-weight:normal; font-size:0.8em;">Jan. 2025 - present</span></h2>
-        <p><strong>Position:</strong> System Software Engineer<br>
-           <strong>Description:</strong> -Administered user accounts through Active Directory, ensuring secure and efficient account management across lab environment.<br>
-           <span class="brag">Implemented Cloud sync Migration from Entra Connect Sync for Hybrid Identity Solution</span>
-           <span class="brag">-Utilized Microsoft Defender suite to monitor and remediate incidents/vulnerabilities, to enhance the security posture of the environment.</span> 
-           <span class="brag"> Utilized Podman Containers to create a multipod container setup with PLACEHOLDER FILL OUT  .</span>  
-           <span class="brag"> Maintained lab documentation compliance with NIST 800-171 standards.  .</span>
-           <span class="brag"> Created Azure Runbooks to check Intune device compliance.</span>
+        <p class="big reveal">
+          I started as an intern assessing NIST 800-53 controls in Azure and now own
+          identity, monitoring, and compliance work for a lab environment.
         </p>
+        <div class="hero__actions reveal">
+          <a class="btn btn--olive" href="#resume">Resume</a>
+          <a class="btn btn--cream" href="#contact">Contact</a>
+        </div>
       </div>
-    </div>
-    <hr class="divider">
+    </section>
 
-    <div class="section middle clearfix">
-      <div class="job">
-        <h2>CACI <i class="fa fa-plus openBtn"></i> <span style="float:right; font-weight:normal; font-size:0.8em;">May 2023 - Dec. 2024</span></h2>
-        <p><strong>Position:</strong> Intern <br>
-           <strong>Description:</strong> Assessed NIST 800-53 controls on Microsoft Azure Defender for Cloud, ensuring compliance with NIST standards.<br>
-           <span class="brag">Configured a Rocky Linux server using DISA STIG's to find a balance of security and usability. 6.</span>
-           <span class="brag"> Conducted a Risk Assessment of the Azure environment. Produced a representative showing the understanding of the system's security posture.</span>  
-        </p>
+    <!-- ====== RESUME ====== -->
+    <section id="resume" class="wrap section">
+      <div class="resume__top">
+        <h2 class="mega reveal">Resume</h2>
+        <a class="btn btn--cream reveal" href="resume.pdf" download>Download PDF</a>
       </div>
-    </div>
-    <hr class="divider">
 
-    <!-- Add more jobs similarly... (shortened for brevity) -->
+      <div class="cols">
+        <!-- Experience -->
+        <div class="col">
+          <h3 class="col__title reveal">Experience</h3>
 
-    <div class="section middle clearfix">
-      <div class="skills code odd">
-        <h3>Certification and Education  <i class="fa fa-code"></i></h3>
-        <ul>
-          <li class="prim">Certifications</li>
-          <li>Assoicate of ISC2</li>
-          <li>AZ-500</li>
-          <li>AZ-900</li>
-          <li class="prim">compTIA Security+</li>
-          <lil> </lil>
-          <li class="prim">Univerity of Maryland Global</li>
-          <li class="prim">Cloud Computing Systems </li>
-          <li class="prim">Jan. 2026 - Present</li>
-          <li class="prim">North Greenville University</li>
-          <li class="prim">Bachelor of Science Cybersecurity Concentration Technical</li>
-          <li class="prim">Aug. 2021 - Dec. 2024</li>
-        </ul>
+          <article class="entry reveal">
+            <p class="entry__date">Jan 2025 – Present</p>
+            <button class="block block--toggle" aria-expanded="false">
+              <span class="block__row"><strong>System Software Engineer</strong><span class="plus" aria-hidden="true"></span></span>
+              <span class="block__row">CACI</span>
+            </button>
+            <div class="entry__desc">
+              <div>
+                <ul>
+                  <li>Administered user accounts through Active Directory, ensuring secure and efficient account management across the lab environment.</li>
+                  <li>Implemented a Cloud Sync migration from Entra Connect Sync for a hybrid identity solution.</li>
+                  <li>Used the Microsoft Defender suite to monitor and remediate incidents and vulnerabilities, strengthening the environment's security posture.</li>
+                  <li>Used Podman containers to build a multi-pod container setup.</li>
+                  <li>Maintained lab documentation in compliance with NIST 800-171.</li>
+                  <li>Created Azure Runbooks to check Intune device compliance.</li>
+                </ul>
+              </div>
+            </div>
+          </article>
+
+          <article class="entry reveal">
+            <p class="entry__date">May 2023 – Dec 2024</p>
+            <button class="block block--toggle" aria-expanded="false">
+              <span class="block__row"><strong>Intern</strong><span class="plus" aria-hidden="true"></span></span>
+              <span class="block__row">CACI</span>
+            </button>
+            <div class="entry__desc">
+              <div>
+                <ul>
+                  <li>Assessed NIST 800-53 controls in Microsoft Defender for Cloud, ensuring compliance with NIST standards.</li>
+                  <li>Configured a Rocky Linux server using DISA STIGs, balancing security and usability.</li>
+                  <li>Conducted a risk assessment of the Azure environment and produced a report on the system's security posture.</li>
+                </ul>
+              </div>
+            </div>
+          </article>
+        </div>
+
+        <!-- Education + certifications -->
+        <div class="col">
+          <h3 class="col__title reveal">Education</h3>
+
+          <article class="entry reveal">
+            <p class="entry__date">Jan 2026 – Present</p>
+            <div class="block">
+              <span class="block__row"><strong>Cloud Computing Systems</strong></span>
+              <span class="block__row">University of Maryland Global Campus</span>
+            </div>
+          </article>
+
+          <article class="entry reveal">
+            <p class="entry__date">Aug 2021 – Dec 2024</p>
+            <div class="block">
+              <span class="block__row"><strong>B.S. Cybersecurity, Technical Concentration</strong></span>
+              <span class="block__row">North Greenville University</span>
+            </div>
+          </article>
+
+          <h3 class="col__title col__title--second reveal">Certifications</h3>
+          <div class="block block--certs reveal">
+            <span class="block__row"><strong>Security+</strong><span>CompTIA</span></span>
+            <span class="block__row"><strong>AZ-500: Azure Security Engineer</strong><span>Microsoft</span></span>
+            <span class="block__row"><strong>AZ-900: Azure Fundamentals</strong><span>Microsoft</span></span>
+            <span class="block__row"><strong>Associate of ISC2</strong><span>ISC2</span></span>
+          </div>
+        </div>
       </div>
-      <div class="skills software">
-        <h3>Practices & Tools <i class="fa fa-laptop"></i></h3>
-        <ul>
-          <li class="prim">Podman Container</li>
-          <li class="prim">Azure</li>
-          <li class="prim">Pyhton</li>
-          <li class="prim">CICD Pipelines: Gitlab/Github and Azure Devops</li>
-          <li class="prim">Lunix</li>
-        </ul>
+    </section>
+
+    <!-- ====== SKILLS ====== -->
+    <section id="skills" class="wrap section">
+      <h2 class="mega reveal">Skills</h2>
+
+      <ul class="rows">
+        <li class="row reveal">
+          <sup class="row__n">01</sup>
+          <h3 class="row__name">Cloud and identity</h3>
+          <ul class="tags">
+            <li>Azure</li>
+            <li>Active Directory</li>
+            <li>Entra ID / Cloud Sync</li>
+            <li>Intune</li>
+          </ul>
+        </li>
+        <li class="row reveal">
+          <sup class="row__n">02</sup>
+          <h3 class="row__name">Security and compliance</h3>
+          <ul class="tags">
+            <li>Microsoft Defender</li>
+            <li>NIST 800-53</li>
+            <li>NIST 800-171</li>
+            <li>DISA STIGs</li>
+          </ul>
+        </li>
+        <li class="row reveal">
+          <sup class="row__n">03</sup>
+          <h3 class="row__name">DevOps and systems</h3>
+          <ul class="tags">
+            <li>Podman</li>
+            <li>Python</li>
+            <li>Linux</li>
+            <li>GitLab</li>
+            <li>GitHub</li>
+            <li>Azure DevOps</li>
+          </ul>
+        </li>
+      </ul>
+    </section>
+
+    <!-- ====== CONTACT ====== -->
+    <section id="contact" class="wrap section contact">
+      <div class="contact__left">
+        <h2 class="mega reveal">Let&rsquo;s talk</h2>
+        <p class="big reveal">Email is the fastest way to reach me.</p>
+        <a class="contact__email reveal" href="mailto:jpfeitshans@comcast.net">jpfeitshans@comcast.net</a>
       </div>
-    </div>
-    <hr class="divider">
 
-    <div class="buttons" style="text-align:center; margin:20px 0;">
-      <a href="http://onelittledesigner.com" target="_blank">1LittleDesigner.com</a>
-      <a href="http://rapidweaverebook.com" target="_blank">RapidWeaverEbook.com</a>
-      <a href="http://pure4rw.com" target="_blank">Pure4RW.com</a>
-    </div>
+      <form class="form reveal" id="contactForm">
+        <div class="form__pair">
+          <label>First name *<input type="text" name="first" required autocomplete="given-name" /></label>
+          <label>Last name *<input type="text" name="last" required autocomplete="family-name" /></label>
+        </div>
+        <label>Email *<input type="email" name="email" required autocomplete="email" /></label>
+        <label>Message<textarea name="message" rows="4"></textarea></label>
+        <div class="form__foot">
+          <button type="submit" class="btn btn--ink">Send</button>
+          <p>Opens your email app with the message filled in.</p>
+        </div>
+      </form>
+    </section>
+  </main>
 
-    <ul class="sm" style="text-align:center; list-style:none; padding:0;">
-      <li style="display:inline;"><a href="https://codepen.io/jhawes/"><i class="fa fa-codepen"></i></a></li>
-      <li style="display:inline;"><a href="https://twitter.com/jeremyhawes"><i class="fa fa-twitter"></i></a></li>
-      <li style="display:inline;"><a href="https://www.facebook.com/1LittleDesigner"><i class="fa fa-facebook"></i></a></li>
-      <li style="display:inline;"><a href="https://www.linkedin.com/in/jeremyhawes"><i class="fa fa-linkedin"></i></a></li>
-    </ul>
-  </div>
-</div>
+  <footer class="wrap footer">
+    <a href="mailto:jpfeitshans@comcast.net">jpfeitshans@comcast.net</a>
+    <span class="footer__links">
+      <a href="https://www.linkedin.com/in/jarod-feitshans-126265223" target="_blank" rel="noopener">LinkedIn</a>
+      <a href="https://github.com/jp-feitz" target="_blank" rel="noopener">GitHub</a>
+    </span>
+    <span>&copy; <span id="year"></span> Jarod Feitshans</span>
+  </footer>
 
-<script src="htmljavafile.js"></script>
+  <script>
+// ====== Experience: click a block to show or hide the details ======
+document.querySelectorAll(".block--toggle").forEach((btn) => {
+  btn.addEventListener("click", () => {
+    const desc = btn.nextElementSibling;
+    const open = btn.getAttribute("aria-expanded") === "true";
+    btn.setAttribute("aria-expanded", String(!open));
+    desc.classList.toggle("is-open", !open);
+  });
+});
+
+// Open the current role by default
+const firstRole = document.querySelector(".block--toggle");
+if (firstRole) firstRole.click();
+
+// ====== Scroll reveal (staggered within each group) ======
+const reveals = document.querySelectorAll(".reveal");
+
+reveals.forEach((el) => {
+  const siblings = [...el.parentElement.children].filter((c) => c.classList.contains("reveal"));
+  el.style.setProperty("--d", Math.min(siblings.indexOf(el), 5) * 100 + "ms");
+});
+
+if ("IntersectionObserver" in window) {
+  const revealObserver = new IntersectionObserver((entries) => {
+    entries.forEach((entry) => {
+      if (!entry.isIntersecting) return;
+      entry.target.classList.add("is-in");
+      revealObserver.unobserve(entry.target);
+    });
+  }, { threshold: 0.12, rootMargin: "0px 0px -6% 0px" });
+  reveals.forEach((el) => revealObserver.observe(el));
+} else {
+  reveals.forEach((el) => el.classList.add("is-in"));
+}
+
+// ====== Underline the nav link for the section in view ======
+const navLinks = document.querySelectorAll(".nav a");
+const navObserver = new IntersectionObserver((entries) => {
+  entries.forEach((entry) => {
+    if (entry.isIntersecting) {
+      navLinks.forEach((a) =>
+        a.classList.toggle("is-current", a.getAttribute("href") === "#" + entry.target.id)
+      );
+    }
+  });
+}, { rootMargin: "-40% 0px -55% 0px" });
+
+document.querySelectorAll("main section[id]").forEach((s) => navObserver.observe(s));
+
+// ====== Contact form: opens the visitor's email app with the message filled in ======
+const form = document.getElementById("contactForm");
+form.addEventListener("submit", (e) => {
+  e.preventDefault();
+  const d = new FormData(form);
+  const name = `${d.get("first")} ${d.get("last")}`.trim();
+  const subject = `Message from ${name}`;
+  const body = `${d.get("message") || ""}\n\n${name}\n${d.get("email")}`;
+  window.location.href =
+    "mailto:jpfeitshans@comcast.net?subject=" + encodeURIComponent(subject) +
+    "&body=" + encodeURIComponent(body);
+});
+
+// ====== Footer year ======
+document.getElementById("year").textContent = new Date().getFullYear();
+
+  </script>
 </body>
 </html>
